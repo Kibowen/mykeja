@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="/frontend/static/css/display.css">
+    <link rel="stylesheet" href="/frontend/static/css/global.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/display.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+</head>  
+<header>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages%}
+                <p class="flashes"> {{msg}} </p>
+            {% endfor%}
+        {% endif %}
+    {% endwith %}
+</header>
+<body>
+   <h1 style="text-align: center" >MyKeja</h1>
+    <section style="text-align: center;" class="loginbox" >
+        <legend>sign up</legend>
+        <form method="post" class="form-container">
+            <p>
+                <label for="firstName"></label>
+                <input type="text" name="firstName" id="firstName" placeholder="First name" autocomplete="on" required>
+            </p>
+            <p>
+                <label for="secondName"></label>
+                <input type="text" name="secondName" id="secondName" placeholder="Second name">
+            </p>
+            <P>
+                <label for="email"></label>
+                <input type="text" name ="email" id="email" placeholder="Enter email">
+            </P>
+            <p>
+                <label for="password1"></label>
+                <input type="password" name="password1" id="password1" placeholder="Enter password"> 
+            </p>
+            <p>
+                <label for="password2"></label>
+                <input type="password" name="password2" id="password2" placeholder="Confirm password"> 
+            </p>
+            <p>
+                already have an account? <a id="login" href="login">login here</a>
+            </p>
+
+            <button type="submit" class="button">sign up</button>
+        </form>
+    </section>
+</body>
+</html>

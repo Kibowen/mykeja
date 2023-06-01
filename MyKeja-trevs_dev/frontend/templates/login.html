@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/display.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="/frontend/static/css/global.css">
+    <link rel="stylesheet" href="/frontend/static/css/display.css">
+</head>
+    
+<header>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages%}
+            <p class="flashes"> {{msg}} </p>
+        {% endfor%}
+    {% endif %}
+{% endwith %}
+<div class="header">
+    
+
+</div>
+</header>
+<body>
+    <h1 style="text-align:center;">MyKeja</h1>
+    <section style="text-align: center;" class="loginbox">
+        <legend>login</legend>
+        <form method="post" class="form-container">
+            <P>
+                <LAbel for="email"></LAbel>
+                <input type="text" name ="email" id="email" placeholder="enter email" autocomplete="on">
+            </P>
+            <p>
+                <label for="password1"></label>
+                <input type="password" name="password1" id="password" placeholder="enter password" autocomplete="on"> 
+            </p>
+            <p>don't have an account? <a id="signup" href="signup">signup</a> </p>
+
+            
+            <button type="submit" class="button">login</button>
+        </form>
+    </section>
+
+</body>
+</html>

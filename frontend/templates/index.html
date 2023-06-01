@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/display.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="/frontend/static/css/display.css">
+    <link rel="stylesheet" href="/frontend//static/css/global.css">
+    <link rel="stylesheet" href="/frontend/static/css/resposive.css">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon white 48px.png') }}">
+    <link rel="icon" href="/frontend/static/images/favicon white 48px.png">
+</head>
+
+<header class="header"  style="background-image: url('{{ url_for('static', filename='images/pexels-francesco-ungaro-4322027.jpg') }}')">
+
+    <div class="nav">
+        <div>
+            <a href="{{ url_for('views.home')}}">
+                <!-- <img src="{{ url_for('static', filename= 'images/Artboard 35.png')}}" alt="mykeja_logo" class="logo"> -->
+                <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a id="signup" href="signup">signup</a>
+                </li>
+                <li>
+                    <a id="login" href="login">login</a>
+                </li>
+            </ul>
+        </nav>
+    </div>  
+
+    <section >
+        <h2>My Keja</h2>
+        <article>
+            MyKeja is a management solution to property owners. a well curated database has been setup to be accessed in the palm of your hands. dont worry about record books, phonebooks. we have it all covered.
+            <br><br>
+            <a class="cta" id="signup" href="signup">GET STARTED</a>
+        </article>
+    </section>
+</header>
+
+<body>
+<section>
+    <article class="block">
+        <h2>features</h2>
+        <div class="features">
+            <div class="card" id="EASY MANAGEMENT">
+                <img src="/frontend/static/images/icons8-asset-management-64.png" alt="management icon">
+                <h3>EASY MANAGEMENT</h3>
+                <p>this is created for landlords who have more that one apartments they are managing. they will be able to create new apartments and add their tenants and caretakers</p>
+            </div>
+            <div class="card" id="HAKIBA PAY">
+                <img src="/frontend/static/images/icons8-savings-66.png" alt="savings icon">
+                <h3>HAKIBA PAY</h3>
+                <p>
+                    haba na haba hujaza kibaba. this is feature is designed to track payment information. especially in small amount. it will be accessible to all parties and will show payment progress. 
+                </p>
+            </div>
+            <div class="card" id="42/7 SUPPORT">
+                <img src="/frontend/static/images/icons8-customer-support-96.png" alt="savings icon" width="66" >
+                <h3>42/7 SUPPORT</h3>
+                <p>
+                    haba na haba hujaza kibaba. this is feature is designed to track payment information. especially in small amount. it will be accessible to all parties and will show payment progress. 
+                </p>
+            </div>
+            <div class="card" id="SECURE">
+                <img src="/frontend/static/images/icons8-user-shield-96.png" alt="savings icon" width="66">
+                <h3>SECURE</h3>
+                <p>
+                    haba na haba hujaza kibaba. this is feature is designed to track payment information. especially in small amount. it will be accessible to all parties and will show payment progress. 
+                </p>
+            </div>
+        </div>
+    </article>
+    
+    <article class="about">
+        <article class="about_article">
+            <h2>about</h2>
+            <p>Welcome to MY KEJA, the ultimate platform for modern building management. Whether you're a building owner, tenant, or caretaker, we have everything you need to streamline your operations and enhance your experience. Our cutting-edge CRM system is designed to simplify your day-to-day tasks and empower you with the tools you need. With MY KEJA, you can manage your properties, communicate with your tenants, and optimize your building's performance—all in one place. Join our community of satisfied users and discover the future of building management today.</p>
+        </article>
+        <div class="about_img">
+            <article>
+
+            </article>
+        </div>
+    </article>
+</section>
+<footer class="contacts">
+    <h2 >developers</h2>
+    
+    <div>
+        <p>Trevor Kibowen</p>
+    </div>
+    <div>
+        <p>catherine Mamo</p>
+    </div>
+</footer>
+
+</body>
+</html>
