@@ -1,7 +1,8 @@
 /* the navigation section */
+
 .nav{
-    padding: 1em;
-    display: none;
+    padding: 0.5em;
+    display: flex;
     justify-content: space-between;
     align-content: center;
 
@@ -32,48 +33,39 @@
   }
 
 .header{
-    background-image: url("/frontend/static/images/pexels-francesco-ungaro-4322027.jpg");
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-color: rgb(0, 0, 0);
     height: 100vh;
-    color: white;
 }
 
-.header section{ /* contains the logo the desciption */
-    width: 100%;
-    height: inherit;
-    display: flex;
+.header section{ /* contains the logo the description */
+    height: 90%;
+    /* display: flex;
     flex-flow: wrap;
     flex-direction: row;
+    justify-content: space-around; */
 }
 
 .header section h2{
-    font-size: 7rem;
-    flex-basis: 100%;
     padding: 30px 30px;
+    font-size: 2.5em;
 }
 
 
 .header section article{
-    flex-basis: 100%;
     padding: 30px 30px;
-    font-size: 1em;
+    font-size: 16px;
     text-align: justify;
-    width: auto;
+    width: 50%;
 }
 
 
 .cta {
     font-size: 1em;
     text-decoration: none;
-    border-radius: 1em;
-    color: #02282E;
-    background-color: #BFD5D5;
+    color: var(--dark);
+    border: 1px solid rgba(0, 0, 0, 0.39);
+    background-color: var(--accent);
     padding: 5px;
     position: relative;
-    left: 65%;
 }
 
 img{
@@ -82,17 +74,17 @@ img{
 }
 
 .logo{
-  height: 40px;
-  width: 140px; 
+  height: 50px;
+  width: 170px; 
+  padding: 6px 10px;
 }
 
 
 
 
-.cta :hover{
-    color: #BFD5D5;
-    background-color: #02282E;
-    border-radius: 1em;
+.cta:hover{
+    color: var(--white);
+    background-color: var(--accent);
     transition: 300ms;
 }
 
@@ -103,7 +95,7 @@ img{
     display: flex;
     justify-content: center;
     flex-direction: row;
-    color: white;
+    color: var(--white);
 }
 
 /* features card container */ 
@@ -139,10 +131,10 @@ img{
 }
 
 .card{
-    flex-basis: 100%;
+    flex-basis: 20%;
     padding: 2em 0;
     border-radius: 1em;
-    background-color:  #7aa7bbe0;
+    background-color:  var(--dark-white);
     margin-top: 10px;
 }
 
@@ -162,16 +154,6 @@ img{
 
 }
 
-.about_img{
-    width: 50%;
-    height: inherit;
-    background-image: url(/frontend/static/images/pexels-gonzalo-carlos-novillo-lapeyra-12608564.jpg);
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-color: rgb(0, 0, 0);
-
-}
 
 .about_article{
     width: 50%;
@@ -202,7 +184,7 @@ li{
 }
 
 li a{
-    color: whitesmoke;
+    color: var(--dark);
     text-decoration: none;
 }
 
@@ -212,13 +194,7 @@ li a:hover, li a:focus {
 
 
 
-/* colors 
-    #02282E - default font color
-    #7BC6E1 - call to action
-    #BFD5D5 - default white.
-*/
-
-@media (min-width:800px) {
+/* @media (min-width:800px) {
     .nav{
      display: flex;
     }
@@ -322,4 +298,4 @@ li a:hover, li a:focus {
 
 
 
-}
+} */

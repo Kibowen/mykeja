@@ -1,5 +1,15 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
  */
+:root{
+  /* colors */
+  --dark: #191b24;
+  --light-dark: #95c892;
+  --dark-white: #f2fdf5;
+  --white: #fcfef6;
+  --accent: #3b5fe2;
+  
+}
+
 
 *{
   margin: 0;
@@ -11,8 +21,8 @@
 html{
   color-scheme: dark light;
   font-size: 16px;
-  background-color: #BFD5D5;
-  color: #02282E;
+  background-color:var(--white);
+  color: var(--dark);
 }
 
 h1{

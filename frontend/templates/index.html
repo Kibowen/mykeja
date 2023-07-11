@@ -15,13 +15,14 @@
     <link rel="icon" href="/frontend/static/images/favicon white 48px.png">
 </head>
 
-<header class="header"  style="background-image: url('{{ url_for('static', filename='images/pexels-francesco-ungaro-4322027.jpg') }}')">
+<header class="header">
 
     <div class="nav">
         <div>
             <a href="{{ url_for('views.home')}}">
                 <!-- <img src="{{ url_for('static', filename= 'images/Artboard 35.png')}}" alt="mykeja_logo" class="logo"> -->
-                <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo">
+                <!-- <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo"> -->
+                <img class="logo" src="/frontend/static/images/Artboard 35.png" alt="my keja logo">
             </a>
         </div>
         <nav>
@@ -85,11 +86,6 @@
             <h2>about</h2>
             <p>Welcome to MY KEJA, the ultimate platform for modern building management. Whether you're a building owner, tenant, or caretaker, we have everything you need to streamline your operations and enhance your experience. Our cutting-edge CRM system is designed to simplify your day-to-day tasks and empower you with the tools you need. With MY KEJA, you can manage your properties, communicate with your tenants, and optimize your building's performance—all in one place. Join our community of satisfied users and discover the future of building management today.</p>
         </article>
-        <div class="about_img">
-            <article>
-
-            </article>
-        </div>
     </article>
 </section>
 <footer class="contacts">
