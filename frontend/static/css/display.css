@@ -34,10 +34,13 @@
 
 .header{
     height: 100vh;
+    background: linear-gradient(200deg, #95C892 0%, #3B5FE2 100%);
 }
 
 .header section{ /* contains the logo the description */
     height: 90%;
+/*     background-color: rgba(255, 228, 196, 0.342);
+ */    width: 50%;
     /* display: flex;
     flex-flow: wrap;
     flex-direction: row;
@@ -45,16 +48,17 @@
 }
 
 .header section h2{
-    padding: 30px 30px;
-    font-size: 2.5em;
-}
+    padding: 50px 50px;
+    font-size: 4em;
+/*     background-color: rgba(0, 255, 255, 0.384);
+ */}
 
 
 .header section article{
     padding: 30px 30px;
     font-size: 16px;
     text-align: justify;
-    width: 50%;
+
 }
 
 
@@ -90,7 +94,7 @@ img{
 
 
 .display{
-    background-color: rgb(0, 0, 0);
+    background-color: black;
     height: 90vh;
     display: flex;
     justify-content: center;
