@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+    background: grey;
 
 }
 
@@ -38,9 +39,8 @@
 }
 
 .header section{ /* contains the logo the description */
-    height: 90%;
-/*     background-color: rgba(255, 228, 196, 0.342);
- */    width: 50%;
+    height:100vh;
+    background-color: rgba(255, 228, 196, 0.342);
     /* display: flex;
     flex-flow: wrap;
     flex-direction: row;
@@ -49,7 +49,8 @@
 
 .header section h2{
     padding: 50px 50px;
-    font-size: 4em;
+    font-size: 2em;
+    /* background: rgba(165, 70, 70, 0.678); */
 /*     background-color: rgba(0, 255, 255, 0.384);
  */}
 
