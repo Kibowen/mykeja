@@ -26,16 +26,6 @@ function addApartment() {
 
     summaryContainer.appendChild(newApartmentSummary);
 
-    var addButton = document.createElement("button");
-    addButton.setAttribute("id", "add-button-" + count);
-    addButton.innerHTML = "Add Another Apartment";
-    addButton.onclick = function() {
-        addApartment();
-    };
-    
-    newApartmentSummary.appendChild(addButton);
-
-    count++;
 }
 
 document.getElementById("add-apartment-button").onclick = function() {

@@ -110,3 +110,56 @@ legend{
     text-decoration: none;
     color: #343664;
   }
+
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .loginbox {
+      width: 90%;
+      height: auto;
+      padding: 2em;
+  }
+
+  .form-container {
+      width: 100%;
+      padding: 1em;
+  }
+
+  input {
+      width: 100%;
+  }
+
+  legend {
+      font-size: 2em;
+  }
+  .button {
+    width: 100%;
+    padding: 10px;
+}
+}
+
+@media (max-width: 480px) {
+  .loginbox {
+      width: 100%;
+      height: auto;
+      padding: 1em;
+  }
+
+  .form-container {
+      width: 100%;
+      padding: 0.5em;
+  }
+
+  input {
+      width: 100%;
+  }
+
+  legend {
+      font-size: 1.5em;
+  }
+
+  .button {
+      width: 100%;
+      padding: 10px;
+    }
+}

@@ -17,9 +17,9 @@ def lordview():
 @views.route('/new-building', methods=['GET', 'POST'])
 @login_required
 def new_building():
-    """form = NewBuildingForm()
-    if form.validate_on_submit():
-        # process form data and save new building to database
-        flash('New building created successfully!', 'success')
-        return redirect(url_for('views.dashboard')) """
+#     form = NewBuildingForm()
+#     if form.validate_on_submit():
+#         # process form data and save new building to database
+#         flash('New building created successfully!', 'success')
+#         return redirect(url_for('views.dashboard'))
     return render_template('landlord.html')
