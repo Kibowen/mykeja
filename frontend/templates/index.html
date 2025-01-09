@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="/frontend/static/css/resposive.css">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon white 48px.png') }}">
     <link rel="icon" href="/frontend/static/images/favicon white 48px.png">
-
-    
-    <script src="{{url for('static', filename='javascript/popup.js')}}"></script>
 </head>
 
 <header class="header">
@@ -45,6 +42,7 @@
             <legend>sign up</legend>
             <span class="close-btn">+</span>
             <form method="post" class="form-container">
+                <input type="hidden" name="signup" value="signup">
                 <p>
                     <label for="firstName"></label>
                     <input type="text" name="firstName" id="firstName" placeholder="First name" autocomplete="on" required>
@@ -66,7 +64,7 @@
                     <input type="password" name="password2" id="password2" placeholder="Confirm password"> 
                 </p>
                 <p>
-                    already have an account? <a id="login" href="login">login here</a>
+                    already have an account? <a id="login" href="#">login here</a>
                 </p>
     
                 <button type="submit" class="button">sign up</button>
@@ -79,6 +77,7 @@
             <legend>login</legend>
             <span class="close-btn">+</span>
             <form method="post" class="form-container">
+                <input type="hidden" name="login" value="login">
                 <P>
                     <LAbel for="email"></LAbel>
                     <input type="text" name ="email" id="email" placeholder="enter email" autocomplete="on">
@@ -87,21 +86,20 @@
                     <label for="password1"></label>
                     <input type="password" name="password1" id="password" placeholder="enter password" autocomplete="on"> 
                 </p>
-                <p>don't have an account? <a id="signup" href="signup">signup</a> </p>
-    
-                
+                <p>don't have an account? <a id="signup" href="#">signup</a> </p>
                 <button type="submit" class="button">login</button>
             </form>
         </div>
 </div>
 <script src="/frontend/static/javascript/signup.js"></script>
+<script src="{{ url_for('static', filename = '/javascript/signup.js') }}"></script>
 
     <section >
         <h2>Manage your assets under one roof.</h2>
         <article>
             MyKeja is a management solution to property owners. a well curated database has been setup to be accessed in the palm of your hands. dont worry about record books, phonebooks. we have it all covered.
             <br><br>
-            <a class="cta" id="signup" href="signup">GET STARTED</a>
+            <a class="cta" id="signup" href="#">GET STARTED</a>
         </article>
     </section>
 </header>
