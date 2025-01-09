@@ -3,7 +3,7 @@ document.getElementById('button').addEventListener('click', function() {
 })
 
 document.querySelector('.close-btn').addEventListener('click', function() {
-    document.querySelector('.bg-modal').style.display = 'none';
+    document.querySelector('.bg-modal').style.display = 'none';;
 })
 
 document.getElementById('add-apartment-button').addEventListener('click', function() {
@@ -13,3 +13,4 @@ document.getElementById('add-apartment-button').addEventListener('click', functi
 document.getElementById('remove-apartment-button').addEventListener('click', function() {
     document.querySelector('.bg-modal').style.display = 'none';
 })
+
