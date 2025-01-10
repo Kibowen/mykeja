@@ -15,96 +15,102 @@
     <link rel="icon" href="/frontend/static/images/favicon white 48px.png">
 </head>
 
-<header class="header">
-
-    <div class="nav">
-        <div>
-            <a href="{{ url_for('views.home')}}">
-                <!-- <img src="{{ url_for('static', filename= 'images/Artboard 35.png')}}" alt="mykeja_logo" class="logo"> -->
-                <!-- <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo"> -->
-                <img class="logo" src="/frontend/static/images/Artboard 35.png" alt="my keja logo">
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li>
-                    <a id="signup" href="#">signup</a>
-                </li>
-                <li>
-                    <a id="login" href="#">login</a>
-                </li>
-            </ul>
-        </nav>
-    </div>  
-
-    <div class="bg-signupbox">
-        <div class="signupbox" >
-            <legend>sign up</legend>
-            <span class="close-btn">+</span>
-            <form method="post" class="form-container">
-                <input type="hidden" name="signup" value="signup">
-                <p>
-                    <label for="firstName"></label>
-                    <input type="text" name="firstName" id="firstName" placeholder="First name" autocomplete="on" required>
-                </p>
-                <p>
-                    <label for="secondName"></label>
-                    <input type="text" name="secondName" id="secondName" placeholder="Second name">
-                </p>
-                <P>
-                    <label for="email"></label>
-                    <input type="text" name ="email" id="email" placeholder="Enter email">
-                </P>
-                <p>
-                    <label for="password1"></label>
-                    <input type="password" name="password1" id="password1" placeholder="Enter password"> 
-                </p>
-                <p>
-                    <label for="password2"></label>
-                    <input type="password" name="password2" id="password2" placeholder="Confirm password"> 
-                </p>
-                <p>
-                    already have an account? <a id="login" href="#">login here</a>
-                </p>
-    
-                <button type="submit" class="button">sign up</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="bg-loginbox">
-        <div class="loginbox">
-            <legend>login</legend>
-            <span class="close-btn">+</span>
-            <form method="post" class="form-container">
-                <input type="hidden" name="login" value="login">
-                <P>
-                    <LAbel for="email"></LAbel>
-                    <input type="text" name ="email" id="email" placeholder="enter email" autocomplete="on">
-                </P>
-                <p>
-                    <label for="password1"></label>
-                    <input type="password" name="password1" id="password" placeholder="enter password" autocomplete="on"> 
-                </p>
-                <p>don't have an account? <a id="signup" href="#">signup</a> </p>
-                <button type="submit" class="button">login</button>
-            </form>
-        </div>
-</div>
-<script src="/frontend/static/javascript/signup.js"></script>
-<script src="{{ url_for('static', filename = '/javascript/signup.js') }}"></script>
-
-    <section >
-        <h2>Manage your assets under one roof.</h2>
-        <article>
-            MyKeja is a management solution to property owners. a well curated database has been setup to be accessed in the palm of your hands. dont worry about record books, phonebooks. we have it all covered.
-            <br><br>
-            <a class="cta" id="signup" href="#">GET STARTED</a>
-        </article>
-    </section>
-</header>
-
 <body>
+    <div class="hero">
+        <div class="nav">
+            <div>
+                <a href="{{ url_for('views.home')}}">
+                    <!-- <img src="{{ url_for('static', filename= 'images/Artboard 35.png')}}" alt="mykeja_logo" class="logo"> -->
+                    <!-- <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo"> -->
+                    <img class="logo" src="/frontend/static/images/Artboard 35.png" alt="my keja logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a id="signup" href="#">signup</a>
+                    </li>
+                    <li>
+                        <a id="login" href="#">login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>  
+    
+        <div class="bg-signupbox">
+            <div class="signupbox" >
+                <legend>sign up</legend>
+                <span class="close-btn">+</span>
+                <form method="post" class="form-container">
+                    <input type="hidden" name="signup" value="signup">
+                    <p>
+                        <label for="firstName"></label>
+                        <input type="text" name="firstName" id="firstName" placeholder="First name" autocomplete="on" required>
+                    </p>
+                    <p>
+                        <label for="secondName"></label>
+                        <input type="text" name="secondName" id="secondName" placeholder="Second name">
+                    </p>
+                    <P>
+                        <label for="email"></label>
+                        <input type="text" name ="email" id="email" placeholder="Enter email">
+                    </P>
+                    <p>
+                        <label for="password1"></label>
+                        <input type="password" name="password1" id="password1" placeholder="Enter password"> 
+                    </p>
+                    <p>
+                        <label for="password2"></label>
+                        <input type="password" name="password2" id="password2" placeholder="Confirm password"> 
+                    </p>
+                    <p>
+                        already have an account? <a id="login" href="#">login here</a>
+                    </p>
+        
+                    <button type="submit" class="button">sign up</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="bg-loginbox">
+            <div class="loginbox">
+                <legend>login</legend>
+                <span class="close-btn">+</span>
+                <form method="post" class="form-container">
+                    <input type="hidden" name="login" value="login">
+                    <P>
+                        <LAbel for="email"></LAbel>
+                        <input type="text" name ="email" id="email" placeholder="enter email" autocomplete="on">
+                    </P>
+                    <p>
+                        <label for="password1"></label>
+                        <input type="password" name="password1" id="password" placeholder="enter password" autocomplete="on"> 
+                    </p>
+                    <p>don't have an account? <a id="signup" href="#">signup</a> </p>
+                    <button type="submit" class="button">login</button>
+                </form>
+            </div>
+        </div>
+        <script src="/frontend/static/javascript/signup.js"></script>
+        <script src="{{ url_for('static', filename = '/javascript/signup.js') }}"></script>
+        <header class="header">
+
+        
+            <div class="content">
+                <section >
+                    <h2>Manage your assets under one roof.</h2>
+                    <article>
+                        MyKeja is a management solution to property owners. a well curated database has been setup to be accessed in the palm of your hands. dont worry about record books, phonebooks. we have it all covered.
+                        <br><br>
+                        <a class="cta" id="signup" href="#">GET STARTED</a>
+                    </article>
+                </section>
+            </div>
+        </header>
+        <!-- <div class="illustration">
+            <img src="/frontend/static/images/illustration.png" alt="Illustration">
+        </div> -->
+    </div>
 <section>
     <article class="block">
         <h2>features</h2>
@@ -145,6 +151,7 @@
         </article>
     </article>
 </section>
+
 <footer class="contacts">
     <h2 >developers</h2>
     

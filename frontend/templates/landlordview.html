@@ -4,81 +4,105 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>landlordview</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/landlord.css') }}">
     <link rel="stylesheet" href="/frontend/static/css/landlord.css">
     <link rel="icon" href="{{ url_for('static', filename='mykejaweb_50px.png') }}">
     <link rel="icon" href="/frontend/static/images/7-removebg-preview.png">
     <!-- <script src="{{ url_for('static', filename = 'popup.js') }}"></script>
-    <script src="/frontend/static/javascript/popup.js"></script> -->
-    <script src="{{ url_for('static', filename = '/javascript/landlord.js') }}"></script>
-    <script src="/frontend/static/javascript/landlord.js"></script>
+    <script src="/frontend/static/javascript/popup.js"></script> -->   
+    
     
 </head>
 
-<header class="header">
-<!-- <img src="/frontend/static/6-removebg-preview.png" alt="mykeja_logo" width="100" height="100" class="logo"> -->
-<img src="{{url_for('static', filename='images/Artboard 35.png')}}" alt="mykeja_logo">
-   
-    <nav>
-        <ul>
-            <li>
-                <a id="logout" href="logout">logout</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+
 
 <body>
+    <header class="header">
+        <!-- <img src="/frontend/static/6-removebg-preview.png" alt="mykeja_logo" width="100" height="100" class="logo"> -->
+        <img src="{{url_for('static', filename='images/Artboard 35.png')}}" alt="mykeja_logo">
+            <div class="nav">
+                <nav>
+                <ul>
+                    <li>
+                        <a id="logout" href="logout">logout</a>
+                    </li>
+                </ul>
+                </nav>
+            </div>         
+    </header>
+
     <section class="card_container">
+        {% for apartment in apartments %}
         <div class="card">
             <div class="summary">
-                <h3>Building Name</h3>
-                <p>Caretaker: </p>
-                <p>Tenants: </p>
-                <button class="btn btn-primary">View Building</button>
+                <h3>{{ apartment.building_name }}</h3>
+                <p>Unit: {{ apartment.unit_number }}</p>
+                <p>Tenants: {{ apartment.tenant_count }}</p>
+                <p>Caretaker: {{ apartment.caretaker }}</p>
+                <form method="post" action="{{ url_for('views.delete_building', id=apartment.id) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button class="btn btn-primary" onclick="openUpdateModal( '{{ apartment.id }}', '{{ apartment.building_name }}', '{{ apartment.unit_number }}', '{{ apartment.tenant_count }}', '{{ apartment.caretaker }}')">Update</button>
             </div>
         </div>
+        {% endfor %}
         <div class="card">
-            <a href="#" class="btn-primary" id="button">Add New Building</a>
-            <!-- <a href="{{ url_for('views.new_building') }}" class="btn btn-primary">Add New Building</a> -->
+            <button id="add-apartment-button" class="btn-primary">Add New Building</button>
         </div>
     </section>
 
-    
-    <div class="bg-modal" >
-        <div class="modal-content" >
+    <div class="bg-modal">
+        <div class="modal-content" id="apartment-form">
             <h3>Add Apartment</h3>
             <span class="close-btn">+</span>
-
-            <input type="text" id="building" name="building" required placeholder="Building Name">
-            <input type="text" id="unit" name="unit" required placeholder="Unit Number">
-            <input type="text" id="tenant" name="tenant" required placeholder="No. of Tenants">
-            <input type="text" id="caretaker" name="caretaker" required placeholder="Caretaker">
-
-            <button id="add-apartment-button">Add Apartment</button>
-            <button id="remove-apartment-button">Remove Apartment</button>
+            <form method="post" action="{{ url_for('views.new_building') }}">
+                <label for="building">Building:</label>
+                <input type="text" id="building" name="building" required>
+                <br><br>
+                <label for="unit">Unit:</label>
+                <input type="text" id="unit" name="unit" required>
+                <br><br>
+                <label for="tenant">Tenant:</label>
+                <input type="text" id="tenant" name="tenant" required>
+                <br><br>
+                <label for="caretaker">Caretaker:</label>
+                <input type="text" id="caretaker" name="caretaker" required>
+                <br><br>
+                <button type="submit" id="add-apartment-button">Add Apartment</button>
+            </form>
         </div>
     </div>
-      <div id="summary-container">  want to put the summary of the cards here. </div>
 
-    <script src="/frontend/static/javascript/landlord.js"></script>
+    <div class="bg-modal" id="update-modal">
+        <div class="modal-content" id="update-form">
+            <h3>Update Apartment</h3>
+            <span class="close-btn" onclick="closeUpdateModal()">+</span>
+            <form method="post" action="" id="update-apartment-form">
+                <label for="update-building">Building:</label>
+                <input type="text" id="update-building" name="building" required>
+                <br><br>
+                <label for="update-unit">Unit:</label>
+                <input type="text" id="update-unit" name="unit" required>
+                <br><br>
+                <label for="update-tenant">Tenant:</label>
+                <input type="text" id="update-tenant" name="tenant" required>
+                <br><br>
+                <label for="update-caretaker">Caretaker:</label>
+                <input type="text" id="update-caretaker" name="caretaker" required>
+                <br><br>
+                <button type="submit" id="update-apartment-button">Update Apartment</button>
+            </form>
+        </div>
+    </div>
+
+
+
     <script src="/frontend/static/javascript/popup.js"></script>
     <script src="{{url_for('static', filename='/javascript/popup.js')}}"></script>
+    
 
-    <!-- <div class="popup">
-        <form class="popup-content" action="{{ url_for('views.new_building') }}" method="POST">
-          <span class="close-btn">&times;</span>
-          <label for="building-name">Building Name:</label>
-          <input type="text" id="building-name" name="building_name" required>
-          <label for="caretaker">Caretaker:</label>
-          <input type="text" id="caretaker" name="caretaker" required>
-          <label for="tenants">Tenants:</label>
-          <input type="number" id="tenants" name="tenants" required>
-          <label for="units">Units:</label>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div> -->
+
 
 </body>
 </html>

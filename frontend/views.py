@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
-from .models import LandLord
+from .models import LandLord, Apartment
 
 
 
@@ -55,17 +55,60 @@ def home():
 @views.route('/dashboard')
 @login_required
 def lordview():
-    return render_template("landlordview.html")
+    apartments = Apartment.query.filter_by(landlord_id=current_user.id).all()
+    return render_template("landlordview.html",apartments=apartments)
 
-@views.route('/new-building', methods=['GET', 'POST'])
+@views.route('/new-building', methods=['POST'])
 @login_required
 def new_building():
-#     form = NewBuildingForm()
-#     if form.validate_on_submit():
-#         # process form data and save new building to database
-#         flash('New building created successfully!', 'success')
-#         return redirect(url_for('views.dashboard'))
-    return render_template('landlord.html')
+    if request.method == 'POST':
+        building_name = request.form.get('building')
+        unit_number = request.form.get('unit')
+        tenant_count = request.form.get('tenant')
+        caretaker = request.form.get('caretaker')
+
+        new_building = Apartment(
+            building_name=building_name, 
+            unit_number=unit_number, 
+            tenant_count=tenant_count, 
+            caretaker=caretaker, 
+            landlord_id=current_user.id
+        )
+        db.session.add(new_building)
+        db.session.commit()
+        flash('Building added successfully', category='success')
+        return redirect(url_for('views.lordview'))
+    return redirect(url_for('views.lordview'))
+
+@views.route('/delete-building/<int:id>', methods=['POST'])
+@login_required
+def delete_building(id):
+    apartment = Apartment.query.get_or_404(id)
+    if apartment.landlord_id != current_user.id:
+        flash('You do not have permission to delete this building', category='error')
+        return redirect(url_for('views.lordview'))
+    
+    db.session.delete(apartment)
+    db.session.commit()
+    flash('Building deleted successfully', category='success')
+    return redirect(url_for('views.lordview'))
+
+@views.route('/update-building/<int:id>', methods=['POST'])
+@login_required
+def update_building(id):
+    apartment = Apartment.query.get_or_404(id)
+    if apartment.landlord_id != current_user.id:
+        flash('You do not have permission to update this building', category='error')
+        return redirect(url_for('views.lordview'))
+    
+    apartment.building_name = request.form.get('building')
+    apartment.unit_number = request.form.get('unit')
+    apartment.tenant_count = request.form.get('tenant')
+    apartment.caretaker = request.form.get('caretaker')
+    
+    db.session.commit()
+    flash('Building updated successfully', category='success')
+    return redirect(url_for('views.lordview'))
 
 @views.route('/logout')
 @login_required
