@@ -32,19 +32,21 @@
             </div>         
     </header>
 
+
     <section class="card_container">
         {% for apartment in apartments %}
         <div class="card">
+            <img src="{{ apartment.image_url }}" alt="Apartment Image">
             <div class="summary">
                 <h3>{{ apartment.building_name }}</h3>
                 <p>Unit: {{ apartment.unit_number }}</p>
                 <p>Tenants: {{ apartment.tenant_count }}</p>
                 <p>Caretaker: {{ apartment.caretaker }}</p>
-                <form method="post" action="{{ url_for('views.delete_building', id=apartment.id) }}">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-                <button class="btn btn-primary" onclick="openUpdateModal( '{{ apartment.id }}', '{{ apartment.building_name }}', '{{ apartment.unit_number }}', '{{ apartment.tenant_count }}', '{{ apartment.caretaker }}')">Update</button>
             </div>
+            <form method="post" action="{{ url_for('views.delete_building', id=apartment.id) }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <button class="btn btn-primary" onclick="openUpdateModal('{{ apartment.id }}', '{{ apartment.building_name }}', '{{ apartment.unit_number }}', '{{ apartment.tenant_count }}', '{{ apartment.caretaker }}')">Update</button>
         </div>
         {% endfor %}
         <div class="card">
