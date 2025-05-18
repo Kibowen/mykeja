@@ -168,59 +168,11 @@ legend {
   }
 
 
- /* Media Queries for responsiveness  */
+ /*Media Queries for Responsiveness */
+
+ /* For tablets and small desktops: screens up to 768px wide */
  @media (max-width: 768px) {
-  .loginbox {
-      width: 90%;
-      height: auto;
-      padding: 2em;
-  }
-
-  .form-container {
-      width: 100%;
-      padding: 1em;
-  }
-
-  input {
-      width: 100%;
-  }
-
-  legend {
-      font-size: 2em;
-  }
-  .button {
-    width: 100%;
-    padding: 10px;
-}
-} 
-
- @media (max-width: 480px) {
-  .loginbox {
-      width: 100%;
-      height: auto;
-      padding: 1em;
-  }
-
-  .form-container {
-      width: 100%;
-      padding: 0.5em;
-  }
-
-  input {
-      width: 100%;
-  }
-
-  legend {
-      font-size: 1.5em;
-  }
-
-  .button {
-      width: 100%;
-      padding: 10px;
-    }
-} 
-
-@media (max-width: 768px) {
+  .loginbox,
   .signupbox {
       width: 90%;
       height: auto;
@@ -239,13 +191,16 @@ legend {
   legend {
       font-size: 2em;
   }
-  .button {
-    width: 100%;
-    padding: 10px;
-}
-} 
 
- @media (max-width: 480px) {
+  .button {
+      width: 100%;
+      padding: 10px;
+  }
+}
+
+/* For mobile devices: screens up to 480px wide */
+@media (max-width: 480px) {
+  .loginbox,
   .signupbox {
       width: 100%;
       height: auto;
@@ -268,5 +223,40 @@ legend {
   .button {
       width: 100%;
       padding: 10px;
-    }
-} 
+  }
+}
+
+/* For large screens and desktops: screens 1200px and above */
+@media (min-width: 1200px) {
+  .loginbox,
+  .signupbox {
+      width: 30%;
+      min-width: 350px;
+      max-width: 500px;
+      padding: 2.5em;
+  }
+
+  .form-container {
+      width: 90%;
+      padding: 2em;
+      margin: 0 auto;
+  }
+
+  input {
+      width: 90%;
+      font-size: 1.1em;
+      margin: 1.5em auto;
+  }
+
+  legend {
+      font-size: 2.5em;
+  }
+
+  .button {
+      width: 60%;
+      padding: 14px;
+      font-size: 1.1em;
+      margin: 1em auto;
+      display: block;
+  }
+}
