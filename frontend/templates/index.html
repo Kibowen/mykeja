@@ -8,34 +8,31 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/display.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     <link rel="stylesheet" href="/frontend/static/css/display.css">
     <link rel="stylesheet" href="/frontend/static/css/global.css">
-    <link rel="stylesheet" href="/frontend/static/css/resposive.css">
+    <link rel="stylesheet" href="/frontend/static/css/responsive.css">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon white 48px.png') }}">
     <link rel="icon" href="/frontend/static/images/favicon white 48px.png">
 </head>
 
 <body>
     <div class="hero">
-        <div class="nav">
-            <div>
-                <a href="{{ url_for('views.home')}}">
-<!-- <img src="{{ url_for('static', filename= 'images/Artboard 35.png')}}" alt="mykeja_logo" class="logo"> -->
-            <!-- <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo"> -->
-                    <img class="logo" src="/frontend/static/images/Artboard 35.png" alt="my keja logo">
-                </a>   
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <a href="{{ url_for('views.home')}}" class="logo-link">
+                    <img class="logo" src="/frontend/static/images/Artboard 35.png" alt="MyKeja logo">
+                </a>
             </div>
-            <nav>
-                <ul>
-                    <li>
-                        <a id="signup-link" href="#">signup</a>
-                    </li>
-                    <li>
-                        <a id="login-link" href="#">login</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>  
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a id="signup-link" href="#" class="navbar__link">Sign Up</a>
+                </li>
+                <li class="navbar__item">
+                    <a id="login-link" href="#" class="navbar__link">Log In</a>
+                </li>
+            </ul>
+        </nav>  
     
         <div class="bg-signupbox">
             <div class="signupbox">
@@ -90,71 +87,75 @@
                 </form>
             </div>
         </div>
-        <script src="/frontend/static/javascript/signup.js"></script>
-        <script src="{{ url_for('static', filename = '/javascript/signup.js') }}"></script>
-        <header class="header">
-            <div class="content">
-                <section>
-                    <h2>Manage your assets under one roof.</h2>
-                    <article>
-                        MyKeja is a management solution to property owners. a well curated database has been setup to be accessed in the palm of your hands. dont worry about record books, phonebooks. we have it all covered.
-                        <br><br>
-                        <a class="cta" id="signup-link" href="#">GET STARTED</a>
-                    </article>
-                </section>
+        <header class="hero__header">
+            <div class="hero__content">
+                <h1 class="hero__title">Manage your assets under one roof.</h1>
+                <p class="hero__description">
+                    MyKeja is a management solution for property owners. A well-curated database accessible in the palm of your hand. Forget record books and phonebooks—we handle it all.
+                </p>
+                <a class="hero__cta btn btn--primary" id="hero-signup" href="#">Get Started</a>
             </div>
         </header>
-<!-- <div class="illustration">
-            <img src="/frontend/static/images/illustration.png" alt="Illustration">
-        </div> -->
     </div>
-    <section>
-        <article class="block">
-            <h2>features</h2>
-            <div class="features">
-                <div class="features-card" id="EASY MANAGEMENT">
-                    <img class="image-icon" src="/frontend/static/images/icons8-asset-management-64.png" alt="management icon">
-                    <h3>EASY MANAGEMENT</h3>
-                    <p>this is created for landlords who have more that one apartments they are managing. they will be able to create new apartments and add their tenants and caretakers</p>
-                </div>
-                <div class="features-card" id="HAKIBA PAY">
-                    <img class="image-icon" src="/frontend/static/images/icons8-savings-66.png" alt="savings icon">
-                    <h3>HAKIBA PAY</h3>
-                    <p>
-                        haba na haba hujaza kibaba. this is feature is designed to track payment information. especially in small amount. it will be accessible to all parties and will show payment progress. 
-                    </p>
-                </div>
-                <div class="features-card" id="42/7 SUPPORT">
-                    <img class="image-icon" src="/frontend/static/images/icons8-customer-support-96.png" alt="savings icon" width="66">
-                    <h3>42/7 SUPPORT</h3>
-                    <p>
-                        haba na haba hujaza kibaba. this is feature is designed to track payment information. especially in small amount. it will be accessible to all parties and will show payment progress. 
-                    </p>
-                </div>
-                <div class="features-card" id="SECURE">
-                    <img class="image-icon" src="/frontend/static/images/icons8-user-shield-96.png" alt="savings icon" width="66">
-                    <h3>SECURE</h3>
-                    <p>
-                        haba na haba hujaza kibaba. this is feature is designed to track payment information. especially in small amount. it will be accessible to all parties and will show payment progress. 
-                    </p>
-                </div>
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section__title">Key Features</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-card__icon">
+                        <img src="/frontend/static/images/icons8-asset-management-64.png" alt="Easy Management icon">
+                    </div>
+                    <h3 class="feature-card__title">Easy Management</h3>
+                    <p class="feature-card__description">Designed for landlords managing multiple properties. Create apartments, manage tenants, and coordinate caretakers all in one place.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-card__icon">
+                        <img src="/frontend/static/images/icons8-savings-66.png" alt="Payment tracking icon">
+                    </div>
+                    <h3 class="feature-card__title">Hakiba Pay</h3>
+                    <p class="feature-card__description">Track payment progress with precision. Monitor small and large transactions, accessible to all parties in real-time.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-card__icon">
+                        <img src="/frontend/static/images/icons8-customer-support-96.png" alt="Customer support icon">
+                    </div>
+                    <h3 class="feature-card__title">24/7 Support</h3>
+                    <p class="feature-card__description">Round-the-clock assistance when you need it. Our dedicated team is always ready to help resolve your concerns.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <div class="feature-card__icon">
+                        <img src="/frontend/static/images/icons8-user-shield-96.png" alt="Security icon">
+                    </div>
+                    <h3 class="feature-card__title">Secure</h3>
+                    <p class="feature-card__description">Enterprise-grade security protecting your data. Your property information stays safe with us.</p>
+                </article>
             </div>
-        </article>
-        
-        <article class="about">
-            <article class="about_article">
-                <h2>about</h2>
-                <p>Welcome to MY KEJA, the ultimate platform for modern building management. Whether you're a building owner, tenant, or caretaker, we have everything you need to streamline your operations and enhance your experience. Our cutting-edge CRM system is designed to simplify your day-to-day tasks and empower you with the tools you need. With MY KEJA, you can manage your properties, communicate with your tenants, and optimize your building's performance—all in one place. Join our community of satisfied users and discover the future of building management today.</p>
-            </article>
-        </article>
+        </div>
+    </section>
+    
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section__title">About MyKeja</h2>
+            <div class="about-content">
+                <p>Welcome to MyKeja, the ultimate platform for modern property management. Whether you're a building owner, tenant, or caretaker, we have everything you need to streamline operations and enhance your experience.</p>
+                <p>Our cutting-edge system simplifies day-to-day tasks and empowers you with essential tools. Manage properties, communicate with tenants, and optimize performance—all in one place.</p>
+                <p>Join our community and discover the future of building management today.</p>
+            </div>
+        </div>
     </section>
 
-    <footer class="contacts">
-        <h2>developers</h2>
-        
-        <div>
-            <p>Trevor Kibowen</p>
+    <footer class="footer">
+        <div class="container">
+            <h2 class="footer__title">Developers</h2>
+            <p class="footer__credit">Trevor Kibowen</p>
+            <p class="footer__copyright">&copy; 2025 MyKeja. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="/frontend/static/javascript/signup.js"></script>
+    <script src="{{ url_for('static', filename = '/javascript/signup.js') }}"></script>
 </body>
 </html>

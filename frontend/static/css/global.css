@@ -1,262 +1,356 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
- */
-:root{
-  /* colors */
+/* ===================================
+   GLOBAL STYLES - Mobile First
+   =================================== */
+
+:root {
+  /* Colors */
   --dark: #191b24;
   --light-dark: #95c892;
   --dark-white: #f2fdf5;
   --white: #fcfef6;
   --accent: #3b5fe2;
+  --text-primary: #191b24;
+  --text-secondary: #555555;
+  --border-color: #e0e0e0;
   
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  
+  /* Typography */
+  --font-primary: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  --font-display: Georgia, 'Times New Roman', Times, serif;
 }
 
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-html{
-  color-scheme: dark light;
+html {
+  color-scheme: light dark;
   font-size: 16px;
-  background-color:var(--white);
-  color: var(--dark);
+  scroll-behavior: smooth;
 }
 
-h1{
-    color: white;
+body {
+  font-family: var(--font-primary);
+  background-color: var(--white);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
 
-.bg-loginbox{   
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--white);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  color: var(--text-primary);
+}
+
+p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: 300ms ease-in-out;
+}
+
+a:hover,
+a:focus {
+  color: #2a3fa8;
+}
+
+/* ===================================
+   FORM ELEMENTS
+   =================================== */
+
+/* Modal Backgrounds */
+.bg-loginbox,
+.bg-signupbox {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   top: 0;
+  left: 0;
+  display: none;
   justify-content: center;
   align-items: center;
-  display: none;
+  z-index: 1000;
+  padding: var(--spacing-md);
 }
 
-.loginbox {
-
-  width: 40%;
-  background-color:var(--dark-white);
-  text-align: center;
-  border-radius: 4px;
-  padding: 20px;
-  position: relative;
-
+.bg-loginbox.active,
+.bg-signupbox.active {
+  display: flex;
 }
 
-.bg-signupbox{   
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-
+/* Modal Boxes */
+.loginbox,
 .signupbox {
-  width: 40%;
-  background-color:var(--dark-white);
-  text-align: center;
-  border-radius: 4px;
-  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  background-color: var(--dark-white);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
   position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideIn 300ms ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-container {
-
-    padding: 1em;
-    border-radius: 30px;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    background-color:var(--white)
-    }
-
-  .close-btn {
-      position: absolute;
-      top: 0;
-      right: 20px;
-      transform: rotate(45deg);
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close-btn:hover,
-    .close-btn:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    
-
-input {
-    /* background-color: #f3eaea00; */
-    border: solid 1px;
-    padding: 1em;
-    margin: 1em;
-    position: relative;
-    border-radius: 10px;
-    background-color:var(--dark-white);
-    border-color: var(--accent);
-    justify-content: center;
-    align-items: center;  
-}
-
-
-input:focus {
-    border: solid 1px;
-    padding: 1em;
-    margin: 1em;
-    position: relative;
-    border-radius: 10px;
-    background-color:var(--dark-white);
-    border-color: var(--accent);
-    justify-content: center;
-    align-items: center;  
+  padding: var(--spacing-md);
+  border-radius: 12px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 legend {
-    font-size: 2em;
-    color: var(--dark);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
 }
 
+/* Form Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--white);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 95, 226, 0.1);
+}
+
+::placeholder {
+  color: #999;
+  font-size: 0.95rem;
+}
+
+/* Form Paragraphs */
+.form-container p {
+  font-size: 0.95rem;
+  margin: var(--spacing-md) 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.form-container p a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.form-container p a:hover {
+  color: #2a3fa8;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 300ms ease-in-out;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: var(--text-primary);
+  outline: none;
+}
+
+/* Buttons */
 .button {
-    background-color: #28365500; /* Green */
-    border: solid rgba(0, 0, 0, 0.514) 1px;
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: var(--spacing-lg) 0 0 0;
+  background-color: var(--accent);
+  color: white;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #2a3fa8;
+  border-color: #2a3fa8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 95, 226, 0.3);
+  outline: none;
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* ===================================
+   UTILITY & ANIMATION CLASSES
+   =================================== */
+
+.flashes {
+  background-color: #eed97d;
+  color: #333;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  border-radius: 6px;
+  animation: slideDown 500ms ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image Styles */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablets: 640px and up */
+@media (min-width: 640px) {
+  html {
     font-size: 16px;
   }
 
-  .button:hover{
-    border: solid black 1px;
-    background-color:var(--accent);
-    transition: 1s;
-
-  }
-
-  ::placeholder {
-    font-style: bold;
-    font-size: 1em;
-    color: var(--dark);
-    padding: 10px;
-  }
-
-  p a{
-    text-decoration: none;
-    color: var(--dark);
-    font-style: italic;
-  }
-
-  p a:hover{
-    text-decoration: none;
-    color: #343664;
-  }
-
-
- /*Media Queries for Responsiveness */
-
- /* For tablets and small desktops: screens up to 768px wide */
- @media (max-width: 768px) {
   .loginbox,
   .signupbox {
-      width: 90%;
-      height: auto;
-      padding: 2em;
+    width: 85%;
+    padding: var(--spacing-lg);
   }
 
-  .form-container {
-      width: 100%;
-      padding: 1em;
-  }
-
-  input {
-      width: 100%;
-  }
-
-  legend {
-      font-size: 2em;
-  }
-
-  .button {
-      width: 100%;
-      padding: 10px;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: var(--spacing-md) 0;
   }
 }
 
-/* For mobile devices: screens up to 480px wide */
-@media (max-width: 480px) {
+/* Small desktops: 1024px and up */
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+
   .loginbox,
   .signupbox {
-      width: 100%;
-      height: auto;
-      padding: 1em;
+    width: 500px;
+    max-width: 90%;
+    padding: var(--spacing-xl);
   }
 
   .form-container {
-      width: 100%;
-      padding: 0.5em;
+    padding: var(--spacing-lg);
   }
 
-  input {
-      width: 100%;
-  }
-
-  legend {
-      font-size: 1.5em;
-  }
-
-  .button {
-      width: 100%;
-      padding: 10px;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 1.05rem;
   }
 }
 
-/* For large screens and desktops: screens 1200px and above */
-@media (min-width: 1200px) {
-  .loginbox,
-  .signupbox {
-      width: 30%;
-      min-width: 350px;
-      max-width: 500px;
-      padding: 2.5em;
-  }
-
-  .form-container {
-      width: 90%;
-      padding: 2em;
-      margin: 0 auto;
-  }
-
-  input {
-      width: 90%;
-      font-size: 1.1em;
-      margin: 1.5em auto;
-  }
-
-  legend {
-      font-size: 2.5em;
-  }
-
-  .button {
-      width: 60%;
-      padding: 14px;
-      font-size: 1.1em;
-      margin: 1em auto;
-      display: block;
+/* Large desktops: 1280px and up */
+@media (min-width: 1280px) {
+  html {
+    font-size: 17px;
   }
 }

@@ -1,139 +1,418 @@
-.card_container{
-  display: flex;
-  width: 100%;
-  height: auto;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  flex-flow: wrap;
-  background-color: rgba(255, 0, 0, 0.267);
+/* ===================================
+   LANDLORD DASHBOARD - Responsive Design
+   =================================== */
+
+:root {
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
 }
 
-.card{
-  width: 200px;
-  height: 200px;
-  margin: 20px;
+/* ===================================
+   CARD CONTAINER
+   =================================== */
+
+.card_container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  width: 100%;
+  padding: var(--spacing-lg);
+  background-color: #f5f5f5;
   box-sizing: border-box;
-  border: 3px solid gray;
-  background-color: rgba(22, 22, 75, 0.589);
-  border-radius: 5px;
+}
+
+/* ===================================
+   CARD COMPONENT
+   =================================== */
+
+.card {
+  display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 300ms ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
 }
 
 .card img {
   width: 100%;
-  height: 50%; /* 50% height for the image */
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #f0f0f0;
 }
-
 
 .summary {
-  padding: 10px;
-  background-color: rgba(7, 129, 44, 0.171);
-  text-align: justify;
+  padding: var(--spacing-md);
+  background-color: #fafafa;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
+.summary p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.summary p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===================================
+   BUTTONS
+   =================================== */
+
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: var(--spacing-sm);
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 300ms ease-in-out;
+  font-weight: 600;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background-color: #3b5fe2;
+  color: white;
+  border-color: #3b5fe2;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #2a3fa8;
+  border-color: #2a3fa8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 95, 226, 0.3);
+}
+
+.btn-danger {
+  background-color: #ff4444;
+  color: white;
+  border-color: #ff4444;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #cc0000;
+  border-color: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
 
 .add-button {
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: green;
-    color: white;
-    cursor: pointer;
-    width: 30%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: var(--spacing-lg);
+  border-radius: 6px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 300ms ease-in-out;
 }
 
+.add-button:hover,
+.add-button:focus {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* ===================================
+   BUTTON CONTAINERS
+   =================================== */
+
+.button-container {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+  padding: var(--spacing-md) 0 0 0;
+}
+
+.button-container .btn {
+  flex: 1;
+  margin: 0;
+}
+
+/* ===================================
+   FORM CONTAINER
+   =================================== */
+
 #form-container {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-    background-color: rgba(7, 129, 44, 0.171);
+  width: 100%;
+  max-width: 600px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-lg);
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#form-container h2 {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-lg);
+  color: #191b24;
+}
+
+#form-container input,
+#form-container select,
+#form-container textarea {
+  width: 100%;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+#form-container input:focus,
+#form-container select:focus,
+#form-container textarea:focus {
+  outline: none;
+  border-color: #3b5fe2;
+  box-shadow: 0 0 0 4px rgba(59, 95, 226, 0.1);
+}
+
+/* ===================================
+   SUMMARY CONTAINER
+   =================================== */
+
+#summary-container {
+  width: 100%;
+  max-width: 800px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-lg);
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#summary-container h2 {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-lg);
+  color: #191b24;
+}
+
+#summary-container p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+/* ===================================
+   MODAL
+   =================================== */
+
+.bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: var(--spacing-md);
+}
+
+.bg-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideIn 300ms ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content h3 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin-bottom: var(--spacing-lg);
+  color: #191b24;
+  font-weight: bold;
+}
+
+.modal-content label {
+  display: block;
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  color: #191b24;
+  font-size: 0.95rem;
+}
+
+.modal-content input {
+  width: 100%;
+  display: block;
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm) 0 var(--spacing-md) 0;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  transition: all 300ms ease-in-out;
+  font-family: inherit;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #3b5fe2;
+  box-shadow: 0 0 0 4px rgba(59, 95, 226, 0.1);
+}
+
+.modal-content button {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+  background-color: #3b5fe2;
+  color: white;
+  border: 2px solid #3b5fe2;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.modal-content button:hover,
+.modal-content button:focus {
+  background-color: #2a3fa8;
+  border-color: #2a3fa8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 95, 226, 0.3);
+  outline: none;
+}
+
+.modal-content button:active {
+  transform: translateY(0);
+}
+.close-btn {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-lg);
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 300ms ease-in-out;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #191b24;
+  outline: none;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablets: 640px and up */
+@media (min-width: 640px) {
+  .card_container {
+    grid-template-columns: repeat(2, 1fr);
+    padding: var(--spacing-xl);
   }
 
-  #summary-container {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px;
+  .card img {
+    height: 250px;
   }
 
-
-  .card .btn {
-    width: 80%;
-    margin: 10px auto;
-    text-align: center;
-  }
-  
-  .card .btn-danger {
-    background-color: red;
-    color: white;
-  }
-  
-  .card .btn-primary {
-    background-color: blue;
-    color: white;
-  }
-   
-.btn{
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 2rem;
-    width: 80%;
-    position: relative;
-    top: 75%;
-    left: 10%;
-    text-align: center;
-  }
-
-  .bg-modal{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top: 0;
-    justify-content: center;
-    align-items: center;
-    display: none;
-  }
-  
+  #form-container,
+  #summary-container,
   .modal-content {
-    width: 60%;
-    background-color: white;
-    /* margin: 0 auto; */
-    text-align: center;
-    border-radius: 4px;
-    padding: 20px;
-    position: relative;
+    padding: var(--spacing-xl);
   }
-  
-  input {
-    width: 80%;
-    display: block;
-    padding: 10px;
-    margin: 15px auto;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+}
+
+/* Small desktops: 1024px and up */
+@media (min-width: 1024px) {
+  .card_container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-xl);
   }
 
+  .card {
+    min-height: 350px;
+  }
 
-  .close-btn {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    transform: rotate(45deg);
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
+  .card img {
+    height: 200px;
   }
-  
-  .close-btn:hover,
-  .close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+
+  #form-container,
+  #summary-container {
+    max-width: 700px;
   }
+
+  .modal-content {
+    max-width: 700px;
+  }
+}
+
+/* Large desktops: 1280px and up */
+@media (min-width: 1280px) {
+  .card_container {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card img {
+    height: 220px;
+  }
+
+  #form-container,
+  #summary-container {
+    max-width: 800px;
+  }
+}
   
 

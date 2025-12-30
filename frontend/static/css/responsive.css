@@ -1,0 +1,429 @@
+/* ===================================
+   RESPONSIVE UTILITIES - Enhanced
+   =================================== */
+
+:root {
+  --max-container-width: 1400px;
+  --mobile-padding: 1rem;
+  --tablet-padding: 1.5rem;
+  --desktop-padding: 2rem;
+}
+
+/* ===================================
+   CONTAINER RESPONSIVE WIDTHS
+   =================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--max-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--mobile-padding);
+  padding-right: var(--mobile-padding);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--tablet-padding);
+    padding-right: var(--tablet-padding);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--desktop-padding);
+    padding-right: var(--desktop-padding);
+  }
+}
+
+/* ===================================
+   TYPOGRAPHY RESPONSIVE
+   =================================== */
+
+@media (max-width: 640px) {
+  h1, h2, h3, h4, h5, h6 {
+    word-break: break-word;
+  }
+}
+
+/* ===================================
+   DISPLAY UTILITIES
+   =================================== */
+
+.hide-mobile {
+  display: none;
+}
+
+.hide-tablet {
+  display: block;
+}
+
+.hide-desktop {
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .hide-mobile {
+    display: block;
+  }
+
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hide-tablet {
+    display: block;
+  }
+
+  .hide-desktop {
+    display: none;
+  }
+}
+
+/* ===================================
+   FLEX UTILITIES
+   =================================== */
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-xs {
+  gap: 0.5rem;
+}
+
+.gap-sm {
+  gap: 1rem;
+}
+
+.gap-md {
+  gap: 1.5rem;
+}
+
+.gap-lg {
+  gap: 2rem;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+/* ===================================
+   GRID UTILITIES
+   =================================== */
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===================================
+   SPACING UTILITIES
+   =================================== */
+
+.p-xs {
+  padding: 0.5rem;
+}
+
+.p-sm {
+  padding: 1rem;
+}
+
+.p-md {
+  padding: 1.5rem;
+}
+
+.p-lg {
+  padding: 2rem;
+}
+
+.px-sm {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-md {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-sm {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-md {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-xs {
+  margin-bottom: 0.5rem;
+}
+
+.mb-sm {
+  margin-bottom: 1rem;
+}
+
+.mb-md {
+  margin-bottom: 1.5rem;
+}
+
+.mb-lg {
+  margin-bottom: 2rem;
+}
+
+.mt-sm {
+  margin-top: 1rem;
+}
+
+.mt-md {
+  margin-top: 1.5rem;
+}
+
+.mt-lg {
+  margin-top: 2rem;
+}
+
+/* ===================================
+   TEXT UTILITIES
+   =================================== */
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.5rem;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-semibold {
+  font-weight: 600;
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+/* ===================================
+   WIDTH & HEIGHT UTILITIES
+   =================================== */
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.max-w-sm {
+  max-width: 24rem;
+}
+
+.max-w-md {
+  max-width: 28rem;
+}
+
+.max-w-lg {
+  max-width: 32rem;
+}
+
+.max-w-xl {
+  max-width: 36rem;
+}
+
+/* ===================================
+   BORDER & SHADOW UTILITIES
+   =================================== */
+
+.rounded-sm {
+  border-radius: 4px;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.rounded-md {
+  border-radius: 12px;
+}
+
+.rounded-lg {
+  border-radius: 16px;
+}
+
+.shadow-sm {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ===================================
+   SCROLL BEHAVIOR
+   =================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}
+
+/* ===================================
+   ACCESSIBILITY
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  * {
+    border-width: 2px;
+  }
+}
+
+/* ===================================
+   FOCUS VISIBLE FOR ACCESSIBILITY
+   =================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #3b5fe2;
+  outline-offset: 2px;
+}
+
+/* ===================================
+   CUSTOM SCROLLBAR
+   =================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
