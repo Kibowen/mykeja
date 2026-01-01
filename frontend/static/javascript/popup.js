@@ -9,7 +9,7 @@ function toggleModal(modal, show) {
 }
 
 // Get modal elements
-const bgModal = document.querySelector('.bg-modal');
+const addModal = document.getElementById('add-modal');
 const updateModal = document.getElementById('update-modal');
 const addApartmentButton = document.getElementById('add-apartment-button');
 
@@ -17,8 +17,11 @@ const addApartmentButton = document.getElementById('add-apartment-button');
 if (addApartmentButton) {
     addApartmentButton.addEventListener('click', function(e) {
         e.preventDefault();
-        if (bgModal) {
-            toggleModal(bgModal, true);
+        if (addModal) {
+            toggleModal(addModal, true);
+            // focus first input for quick data entry
+            const first = document.getElementById('building');
+            if (first) first.focus();
         }
     });
 }
@@ -27,8 +30,8 @@ if (addApartmentButton) {
 document.querySelectorAll('.close-btn').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
-        if (bgModal) {
-            toggleModal(bgModal, false);
+        if (addModal) {
+            toggleModal(addModal, false);
         }
         if (updateModal) {
             toggleModal(updateModal, false);
@@ -36,11 +39,22 @@ document.querySelectorAll('.close-btn').forEach(function(btn) {
     });
 });
 
+// Cancel buttons (bottom of modal)
+document.querySelectorAll('.cancel-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = btn.dataset.target;
+        if (!target) return;
+        const modal = document.getElementById(target);
+        if (modal) toggleModal(modal, false);
+    });
+});
+
 // Close modal when clicking outside on background
-if (bgModal) {
-    bgModal.addEventListener('click', function(e) {
-        if (e.target === bgModal) {
-            toggleModal(bgModal, false);
+if (addModal) {
+    addModal.addEventListener('click', function(e) {
+        if (e.target === addModal) {
+            toggleModal(addModal, false);
         }
     });
 }
@@ -69,6 +83,8 @@ function openUpdateModal(id, building, unit, tenant, caretaker) {
 
     if (updateModal) {
         toggleModal(updateModal, true);
+        const first = document.getElementById('update-building');
+        if (first) first.focus();
     }
 }
 
@@ -82,14 +98,11 @@ function closeUpdateModal() {
 // Close modal with Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        if (bgModal) {
-            toggleModal(bgModal, false);
+        if (addModal) {
+            toggleModal(addModal, false);
         }
         if (updateModal) {
             toggleModal(updateModal, false);
         }
     }
 });
-
-
-

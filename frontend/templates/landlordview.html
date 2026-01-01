@@ -4,106 +4,310 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - MyKeja</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/landlord.css') }}">
-    <link rel="stylesheet" href="/frontend/static/css/landlord.css">
-    <link rel="icon" href="{{ url_for('static', filename='mykejaweb_50px.png') }}">
-    <link rel="icon" href="/frontend/static/images/7-removebg-preview.png">
-    <!-- <script src="{{ url_for('static', filename = 'popup.js') }}"></script>
-    <script src="/frontend/static/javascript/popup.js"></script> -->   
-    
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon white 48px.png') }}">
 </head>
 
-
-
 <body>
-    <header class="header">
-        <!-- <img src="/frontend/static/6-removebg-preview.png" alt="mykeja_logo" width="100" height="100" class="logo"> -->
-        <img src="{{url_for('static', filename='images/Artboard 35.png')}}" alt="mykeja_logo">
-            <div class="nav">
-                <nav>
-                <ul>
-                    <li>
-                        <a id="logout" href="logout">logout</a>
-                    </li>
-                </ul>
-                </nav>
-            </div>         
-    </header>
-
-    <section class="card_container">
-        {% for apartment in apartments %}
-        <div class="card">
-            <img src="{{ apartment.image_url }}" alt="Apartment Image">
-            <div class="summary">
-                <h3>{{ apartment.building_name }}</h3>
-                <p>Unit: {{ apartment.unit_number }}</p>
-                <p>Tenants: {{ apartment.tenant_count }}</p>
-                <p>Caretaker: {{ apartment.caretaker }}</p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="mykeja_logo" class="logo-img">
+                MyKeja
             </div>
-            <form method="post" action="{{ url_for('views.delete_building', id=apartment.id) }}">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            <button class="btn btn-primary" onclick="openUpdateModal('{{ apartment.id }}', '{{ apartment.building_name }}', '{{ apartment.unit_number }}', '{{ apartment.tenant_count }}', '{{ apartment.caretaker }}')">Update</button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('views.logout') }}" class="btn btn-outline">Logout</a></li>
+            </ul>
         </div>
-        {% endfor %}
-        <div class="card">
-            <button id="add-apartment-button" class="btn-primary">Add New Building</button>
-        </div>
-    </section>
+    </nav>
 
-    <div class="bg-modal">
-        <div class="modal-content" id="apartment-form">
-            <h3>Add Apartment</h3>
-            <span class="close-btn">+</span>
-            <form method="post" action="{{ url_for('views.new_building') }}">
-                <label for="building">Building:</label>
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="active" data-view="dashboard-section"><i class="fa-solid fa-gauge"></i> Dashboard</li>
+                    <li data-view="buildings-section"><i class="fa-solid fa-building"></i> My Buildings</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header with Title and Add Button -->
+            <div class="page-header">
+                <h2>My Buildings</h2>
+                <button id="add-apartment-button" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add Building
+                </button>
+            </div>
+
+            <!-- Dashboard Section (summary, charts, table) -->
+            <section id="dashboard-section" class="view-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Total Buildings</h4>
+                        <p class="stat-number">{{ apartments|length }}</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Total Tenants</h4>
+                        <p id="total-tenants" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Notifications</h4>
+                        <p class="stat-number">0</p>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h4>Tenants per Building</h4>
+                        <canvas id="tenantsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Units Overview</h4>
+                        <canvas id="unitsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <h4>Buildings</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Building</th>
+                                <th>Unit</th>
+                                <th>Tenants</th>
+                                <th>Caretaker</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for apartment in apartments %}
+                            <tr>
+                                <td>{{ apartment.building_name }}</td>
+                                <td>{{ apartment.unit_number }}</td>
+                                <td>{{ apartment.tenant_count }}</td>
+                                <td>{{ apartment.caretaker }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Buildings Section (cards) -->
+            <section id="buildings-section" class="view-section hidden">
+                <section class="property-grid">
+                    {% for apartment in apartments %}
+                    <div class="property-card">
+                        <div class="card-image">
+                            <img src="{{ apartment.image_url }}" alt="Building Image">
+                        </div>
+                        <div class="card-details">
+                            <h3>{{ apartment.building_name }}</h3>
+                            <div class="card-stat">
+                                <i class="fa-solid fa-door-open"></i>
+                                <span>Unit: {{ apartment.unit_number }}</span>
+                            </div>
+                            <div class="card-stat">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Tenants: {{ apartment.tenant_count }}</span>
+                            </div>
+                            <div class="card-stat">
+                                <i class="fa-solid fa-person"></i>
+                                <span>Caretaker: {{ apartment.caretaker }}</span>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-primary" onclick="openUpdateModal('{{ apartment.id }}', '{{ apartment.building_name }}', '{{ apartment.unit_number }}', '{{ apartment.tenant_count }}', '{{ apartment.caretaker }}')">
+                                    <i class="fa-solid fa-pen"></i> Update
+                                </button>
+                                <form method="post" action="{{ url_for('views.delete_building', id=apartment.id) }}" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa-solid fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Building Modal -->
+    <div class="bg-modal" id="add-modal">
+        <div class="modal-content">
+            <h3>Add New Building</h3>
+            <span class="close-btn" onclick="toggleModal(document.getElementById('add-modal'), false)">×</span>
+            <form method="post" action="{{ url_for('views.new_building') }}" id="apartment-form">
+                <label for="building">Building Name:</label>
                 <input type="text" id="building" name="building" required>
-                <br><br>
-                <label for="unit">Unit:</label>
+                
+                <label for="unit">Unit Number:</label>
                 <input type="text" id="unit" name="unit" required>
-                <br><br>
-                <label for="tenant">Tenant:</label>
+                
+                <label for="tenant">Tenant Name:</label>
                 <input type="text" id="tenant" name="tenant" required>
-                <br><br>
+                
                 <label for="caretaker">Caretaker:</label>
                 <input type="text" id="caretaker" name="caretaker" required>
-                <br><br>
-                <button type="submit" id="add-apartment-button">Add Apartment</button>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Add Building</button>
+                    <button type="button" class="btn btn-outline cancel-btn" data-target="add-modal">Cancel</button>
+                </div>
             </form>
         </div>
     </div>
 
+    <!-- Update Building Modal -->
     <div class="bg-modal" id="update-modal">
-        <div class="modal-content" id="update-form">
-            <h3>Update Apartment</h3>
-            <span class="close-btn" onclick="closeUpdateModal()">+</span>
+        <div class="modal-content">
+            <h3>Update Building</h3>
+            <span class="close-btn" onclick="closeUpdateModal()">×</span>
             <form method="post" action="" id="update-apartment-form">
-                <label for="update-building">Building:</label>
+                <label for="update-building">Building Name:</label>
                 <input type="text" id="update-building" name="building" required>
-                <br><br>
-                <label for="update-unit">Unit:</label>
+                
+                <label for="update-unit">Unit Number:</label>
                 <input type="text" id="update-unit" name="unit" required>
-                <br><br>
-                <label for="update-tenant">Tenant:</label>
+                
+                <label for="update-tenant">Tenant Name:</label>
                 <input type="text" id="update-tenant" name="tenant" required>
-                <br><br>
+                
                 <label for="update-caretaker">Caretaker:</label>
                 <input type="text" id="update-caretaker" name="caretaker" required>
-                <br><br>
-                <button type="submit" id="update-apartment-button">Update Apartment</button>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Update Building</button>
+                    <button type="button" class="btn btn-outline cancel-btn" data-target="update-modal">Cancel</button>
+                </div>
             </form>
         </div>
     </div>
 
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Socket.IO client -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 
+    <!-- Server-rendered apartments JSON for client JS -->
+    <script id="apartments-data" type="application/json">{{ apartments_data|tojson }}</script>
 
-    <script src="/frontend/static/javascript/popup.js"></script>
-    <script src="{{url_for('static', filename='/javascript/popup.js')}}"></script>
-    
+    <script>
+    // Sidebar view switching + chart rendering (with live update support)
+    let tenantsChartInstance = null;
+    let unitsChartInstance = null;
 
+    function showView(id) {
+        const sections = document.querySelectorAll('.view-section');
+        const sidebarItems = document.querySelectorAll('.sidebar-menu li[data-view]');
+        sections.forEach(s => s.classList.add('hidden'));
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('hidden');
+        sidebarItems.forEach(li => li.classList.toggle('active', li.dataset.view === id));
+    }
 
+    function buildChartsAndStats(apartmentsData) {
+        const labels = apartmentsData.map(a => a.building_name || '');
+        const tenantsData = apartmentsData.map(a => Number(a.tenant_count) || 0);
 
+        // Update total tenants
+        const totalTenantsEl = document.getElementById('total-tenants');
+        if (totalTenantsEl) {
+            const sum = tenantsData.reduce((s, v) => s + (v||0), 0);
+            totalTenantsEl.textContent = sum;
+        }
+
+        // Tenants bar chart
+        const tctx = document.getElementById('tenantsChart');
+        if (tctx) {
+            if (tenantsChartInstance) tenantsChartInstance.destroy();
+            tenantsChartInstance = new Chart(tctx.getContext('2d'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Tenants', data: tenantsData, backgroundColor: 'rgba(59,95,226,0.7)' }] },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        // Units pie chart
+        const uctx = document.getElementById('unitsChart');
+        if (uctx) {
+            if (unitsChartInstance) unitsChartInstance.destroy();
+            unitsChartInstance = new Chart(uctx.getContext('2d'), {
+                type: 'pie',
+                data: { labels: labels, datasets: [{ data: labels.map(() => 1), backgroundColor: labels.map((_,i) => `hsl(${i*40 % 360} 70% 55%)`) }] },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        // Update table and cards: replace table body and cards markup
+        const tableBody = document.querySelector('.data-table tbody');
+        if (tableBody) {
+            tableBody.innerHTML = apartmentsData.map(a => `
+                <tr>
+                    <td>${a.building_name || ''}</td>
+                    <td>${a.unit_number || ''}</td>
+                    <td>${a.tenant_count || 0}</td>
+                    <td>${a.caretaker || ''}</td>
+                </tr>
+            `).join('');
+        }
+
+        const grid = document.querySelector('.property-grid');
+        if (grid) {
+            grid.innerHTML = apartmentsData.map(a => `
+                <div class="property-card">
+                    <div class="card-image"><img src="${a.image_url || ''}" alt="Building Image"></div>
+                    <div class="card-details">
+                        <h3>${a.building_name || ''}</h3>
+                        <div class="card-stat"><i class="fa-solid fa-door-open"></i><span>Unit: ${a.unit_number || ''}</span></div>
+                        <div class="card-stat"><i class="fa-solid fa-users"></i><span>Tenants: ${a.tenant_count || 0}</span></div>
+                        <div class="card-stat"><i class="fa-solid fa-person"></i><span>Caretaker: ${a.caretaker || ''}</span></div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="openUpdateModal('${a.id}', '${a.building_name}', '${a.unit_number}', '${a.tenant_count}', '${a.caretaker}')"><i class="fa-solid fa-pen"></i> Update</button>
+                            <form method="post" action="/delete-building/${a.id}" style="display:inline;"><button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button></form>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // wire sidebar
+        document.querySelectorAll('.sidebar-menu li[data-view]').forEach(li => li.addEventListener('click', function() { showView(this.dataset.view); }));
+        showView('dashboard-section');
+
+        // initial render from server blob
+        const apartmentsJsonEl = document.getElementById('apartments-data');
+        let initialData = [];
+        if (apartmentsJsonEl) {
+            try { initialData = JSON.parse(apartmentsJsonEl.textContent || '[]'); } catch (e) { console.error('parse error', e); }
+        }
+        buildChartsAndStats(initialData);
+
+        // connect to socket.io for live updates
+        try {
+            const socket = io();
+            socket.on('apartments_update', (payload) => {
+                const data = payload && payload.apartments ? payload.apartments : [];
+                // update hidden JSON blob (if present)
+                const el = document.getElementById('apartments-data');
+                if (el) el.textContent = JSON.stringify(data);
+                buildChartsAndStats(data);
+            });
+        } catch (err) {
+            console.warn('Socket.IO not available', err);
+        }
+    });
+    </script>
+
+    <script src="{{ url_for('static', filename='javascript/popup.js') }}"></script>
 </body>
 </html>

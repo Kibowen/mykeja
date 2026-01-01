@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
+from . import db, socketio
 from .models import LandLord, Apartment
 
 
@@ -56,7 +56,18 @@ def home():
 @login_required
 def lordview():
     apartments = Apartment.query.filter_by(landlord_id=current_user.id).all()
-    return render_template("landlordview.html",apartments=apartments)
+    # Build a JSON-serializable representation for client-side charts
+    apartments_data = []
+    for a in apartments:
+        apartments_data.append({
+            'id': a.id,
+            'building_name': a.building_name,
+            'unit_number': a.unit_number,
+            'tenant_count': a.tenant_count if a.tenant_count is not None else 0,
+            'caretaker': a.caretaker,
+            'image_url': getattr(a, 'image_url', '')
+        })
+    return render_template("landlordview.html", apartments=apartments, apartments_data=apartments_data)
 
 @views.route('/new-building', methods=['POST'])
 @login_required
@@ -76,6 +87,20 @@ def new_building():
         )
         db.session.add(new_building)
         db.session.commit()
+        # emit updated apartments list to connected clients
+        apartments = Apartment.query.filter_by(landlord_id=current_user.id).all()
+        apartments_data = []
+        for a in apartments:
+            apartments_data.append({
+                'id': a.id,
+                'building_name': a.building_name,
+                'unit_number': a.unit_number,
+                'tenant_count': a.tenant_count if a.tenant_count is not None else 0,
+                'caretaker': a.caretaker,
+                'image_url': getattr(a, 'image_url', '')
+            })
+        if socketio is not None:
+            socketio.emit('apartments_update', {'apartments': apartments_data})
         flash('Building added successfully', category='success')
         return redirect(url_for('views.lordview'))
     return redirect(url_for('views.lordview'))
@@ -90,6 +115,20 @@ def delete_building(id):
     
     db.session.delete(apartment)
     db.session.commit()
+    # emit updated apartments list
+    apartments = Apartment.query.filter_by(landlord_id=current_user.id).all()
+    apartments_data = []
+    for a in apartments:
+        apartments_data.append({
+            'id': a.id,
+            'building_name': a.building_name,
+            'unit_number': a.unit_number,
+            'tenant_count': a.tenant_count if a.tenant_count is not None else 0,
+            'caretaker': a.caretaker,
+            'image_url': getattr(a, 'image_url', '')
+        })
+    if socketio is not None:
+        socketio.emit('apartments_update', {'apartments': apartments_data})
     flash('Building deleted successfully', category='success')
     return redirect(url_for('views.lordview'))
 
@@ -107,6 +146,20 @@ def update_building(id):
     apartment.caretaker = request.form.get('caretaker')
     
     db.session.commit()
+    # emit updated apartments list
+    apartments = Apartment.query.filter_by(landlord_id=current_user.id).all()
+    apartments_data = []
+    for a in apartments:
+        apartments_data.append({
+            'id': a.id,
+            'building_name': a.building_name,
+            'unit_number': a.unit_number,
+            'tenant_count': a.tenant_count if a.tenant_count is not None else 0,
+            'caretaker': a.caretaker,
+            'image_url': getattr(a, 'image_url', '')
+        })
+    if socketio is not None:
+        socketio.emit('apartments_update', {'apartments': apartments_data})
     flash('Building updated successfully', category='success')
     return redirect(url_for('views.lordview'))
 

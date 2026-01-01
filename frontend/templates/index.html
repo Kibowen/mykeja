@@ -9,19 +9,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/display.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
-    <link rel="stylesheet" href="/frontend/static/css/display.css">
-    <link rel="stylesheet" href="/frontend/static/css/global.css">
-    <link rel="stylesheet" href="/frontend/static/css/responsive.css">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon white 48px.png') }}">
-    <link rel="icon" href="/frontend/static/images/favicon white 48px.png">
 </head>
 
 <body>
     <div class="hero">
         <nav class="navbar">
             <div class="navbar__logo">
-                <a href="{{ url_for('views.home')}}" class="logo-link">
-                    <img class="logo" src="/frontend/static/images/Artboard 35.png" alt="MyKeja logo">
+                <a href="{{ url_for('views.home') }}" class="logo-link">
+                    <img class="logo" src="{{ url_for('static', filename='images/Artboard 35.png') }}" alt="MyKeja logo">
                 </a>
             </div>
             <ul class="navbar__menu">
@@ -38,7 +34,7 @@
             <div class="signupbox">
                 <legend>sign up</legend>
                 <span class="close-btn">+</span>
-                <form method="post" class="form-container">
+                <form method="post" action="{{ url_for('views.home') }}" class="form-container">
                     <input type="hidden" name="signup" value="signup">
                     <p>
                         <label for="firstName"></label>
@@ -50,15 +46,21 @@
                     </p>
                     <p>
                         <label for="email"></label>
-                        <input type="text" name="email" id="email" placeholder="Enter email">
+                        <input type="email" name="email" id="email" placeholder="Enter email" required>
                     </p>
                     <p>
                         <label for="password1"></label>
-                        <input type="password" name="password1" id="password1" placeholder="Enter password"> 
+                        <div class="password-field">
+                            <input type="password" name="password1" id="password1" placeholder="Enter password" required>
+                            <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordVisibility('password1')"></i>
+                        </div>
                     </p>
                     <p>
                         <label for="password2"></label>
-                        <input type="password" name="password2" id="password2" placeholder="Confirm password"> 
+                        <div class="password-field">
+                            <input type="password" name="password2" id="password2" placeholder="Confirm password" required>
+                            <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordVisibility('password2')"></i>
+                        </div>
                     </p>
                     <p>
                         already have an account? <a id="login" href="#">login here</a>
@@ -72,15 +74,18 @@
             <div class="loginbox">
                 <legend>login</legend>
                 <span class="close-btn">+</span>
-                <form method="post" class="form-container">
+                <form method="post" action="{{ url_for('views.home') }}" class="form-container">
                     <input type="hidden" name="login" value="login">
                     <p>
-                        <label for="email"></label>
-                        <input type="text" name="email" id="email" placeholder="enter email" autocomplete="on">
+                        <label for="email-login"></label>
+                        <input type="email" name="email" id="email-login" placeholder="enter email" autocomplete="on" required>
                     </p>
                     <p>
-                        <label for="password1"></label>
-                        <input type="password" name="password1" id="password" placeholder="enter password" autocomplete="on"> 
+                        <label for="password-login"></label>
+                        <div class="password-field">
+                            <input type="password" name="password1" id="password-login" placeholder="enter password" autocomplete="on" required>
+                            <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordVisibility('password-login')"></i>
+                        </div>
                     </p>
                     <p>don't have an account? <a id="signup" href="#">signup</a> </p>
                     <button type="submit" class="button">login</button>
@@ -103,7 +108,7 @@
             <div class="features-grid">
                 <article class="feature-card">
                     <div class="feature-card__icon">
-                        <img src="/frontend/static/images/icons8-asset-management-64.png" alt="Easy Management icon">
+                        <img src="{{ url_for('static', filename='images/icons8-asset-management-64.png') }}" alt="Easy Management icon">
                     </div>
                     <h3 class="feature-card__title">Easy Management</h3>
                     <p class="feature-card__description">Designed for landlords managing multiple properties. Create apartments, manage tenants, and coordinate caretakers all in one place.</p>
@@ -111,7 +116,7 @@
                 
                 <article class="feature-card">
                     <div class="feature-card__icon">
-                        <img src="/frontend/static/images/icons8-savings-66.png" alt="Payment tracking icon">
+                        <img src="{{ url_for('static', filename='images/icons8-savings-66.png') }}" alt="Payment tracking icon">
                     </div>
                     <h3 class="feature-card__title">Hakiba Pay</h3>
                     <p class="feature-card__description">Track payment progress with precision. Monitor small and large transactions, accessible to all parties in real-time.</p>
@@ -119,7 +124,7 @@
                 
                 <article class="feature-card">
                     <div class="feature-card__icon">
-                        <img src="/frontend/static/images/icons8-customer-support-96.png" alt="Customer support icon">
+                        <img src="{{ url_for('static', filename='images/icons8-customer-support-96.png') }}" alt="Customer support icon">
                     </div>
                     <h3 class="feature-card__title">24/7 Support</h3>
                     <p class="feature-card__description">Round-the-clock assistance when you need it. Our dedicated team is always ready to help resolve your concerns.</p>
@@ -127,7 +132,7 @@
                 
                 <article class="feature-card">
                     <div class="feature-card__icon">
-                        <img src="/frontend/static/images/icons8-user-shield-96.png" alt="Security icon">
+                        <img src="{{ url_for('static', filename='images/icons8-user-shield-96.png') }}" alt="Security icon">
                     </div>
                     <h3 class="feature-card__title">Secure</h3>
                     <p class="feature-card__description">Enterprise-grade security protecting your data. Your property information stays safe with us.</p>
@@ -155,7 +160,6 @@
         </div>
     </footer>
 
-    <script src="/frontend/static/javascript/signup.js"></script>
-    <script src="{{ url_for('static', filename = '/javascript/signup.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/signup.js') }}"></script>
 </body>
 </html>
